@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dwarf-assembly-bias"
+version = "0.0.1"
+authors = [
+  { name="Ziwen Zhang", email="ziwen@mail.ustc.edu.cn" },
+  { name="Yangyao Chen", email="yangyaochen.astro@foxmail.com" },
+  { name="Yu Rong", email="rongyua@ustc.edu.cn" },
+  { name="Huiyuan Wang", email="whywang@ustc.edu.cn" }
+]
+description = "Codes for the paper: Unexpected clustering pattern in dwarf galaxies challenges formation models"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pyhipp", "pyhipp-sims", "flake8", "pytest>=7.0.0"
+]
+
+[project.urls]
+Repository = "https://github.com/ChenYangyao/dwarf_assembly_bias.git"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  ".", "src"
+]

@@ -20,7 +20,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "pyhipp", "pyhipp-sims", "flake8", "pytest>=7.0.0", "elucid"
+    "pyhipp>=0.3.4", "pyhipp-sims", "flake8", "pytest>=7.0.0", "elucid"
 ]
 
 [project.urls]

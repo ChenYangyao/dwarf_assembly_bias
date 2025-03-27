@@ -1,5 +1,5 @@
 flake8
 pytest
-pyhipp
+pyhipp>=0.3.4
 pyhipp-sims
 elucid

@@ -24,18 +24,18 @@ Alternatively, you can clone the repository and install the package locally via 
 
 Code samples are organized as individual programs, scripts or jupyter-notebooks,
 each for a specific procedure in producing the results in the paper.
-All code samples are put under ``docs/code_samples``:
-- ``cal_2pccf/``: program for 2PCCF computation.
-- ``cov_fit.py``, ``fit_bias.py``: measuring the covariance matrix and fitting the relative bias.
-- ``cal_halomass.py``: HI-based halo mass estimation by assuming Burkert profile.
-- ``theory.ipynb``: theoretical interpretations (galaxy-galaxy and galaxy-cosmic web 2PCCF, abundance matching, model of self-interaction dark matter).
+All code samples are put under [docs/code_samples/](docs/code_samples):
+- [cal_2pccf/](docs/code_samples/cal_2pccf/): program for 2PCCF computation.
+- [cov_fit.py](docs/code_samples/cov_fit.py), [fit_bias.py](docs/code_samples/fit_bias.py): measuring the covariance matrix and fitting the relative bias.
+- [cal_halomass.py](docs/code_samples/cal_halomass.py): HI-based halo mass estimation by assuming Burkert profile.
+- [theory.ipynb](docs/code_samples/theory.ipynb): theoretical interpretations (galaxy-galaxy and galaxy-cosmic web 2PCCF, abundance matching, model of self-interaction dark matter).
 
 ### Data for the figures
 
-Here we provide all the data sheets, and scripts to load the data sheets and generate the figures exactly as those presented in the paper. All of these are held under ``docs/figures``. Specifically,
-- ``data/``: Excel data sheets, one for each Figure or Extended Data Figure.
-- ``plots_observation.py``: scripts to generate observational figures (Fig. 1 and Extended Data Figs. 1-7).
-- ``plots_theory.ipynb``: scripts to generate theoretical figures (Figs. 2, 3, 4 and Extended Data Fig. 8).
+Here we provide all the data sheets, and scripts to load the data sheets and generate the figures exactly as those presented in the paper. All of these are held under [docs/figures/](docs/figures/). Specifically,
+- [data/](docs/figures/data/): Excel data sheets, one for each Figure or Extended Data Figure.
+- [plots_observation.py](docs/figures/plots_observation.py): scripts to generate observational figures (Fig. 1 and Extended Data Figs. 1-7).
+- [plots_theory.ipynb](docs/figures/plots_theory.ipynb): scripts to generate theoretical figures (Figs. 2, 3, 4 and Extended Data Fig. 8).
 
 
 ## For developers

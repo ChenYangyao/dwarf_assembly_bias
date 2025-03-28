@@ -2,14 +2,13 @@
   <img width="1024px" src="https://raw.githubusercontent.com/ChenYangyao/dwarf_assembly_bias/master/docs/site_data/cover-github.jpg"/>
 </div>
 
-# Unexpected clustering pattern in dwarf galaxies challenges formation models
 
 [![Last commit](https://img.shields.io/github/last-commit/ChenYangyao/dwarf_assembly_bias/master)](https://github.com/ChenYangyao/dwarf_assembly_bias/commits/master)
 [![Workflow Status](https://img.shields.io/github/actions/workflow/status/ChenYangyao/dwarf_assembly_bias/run-test.yml)](https://github.com/ChenYangyao/dwarf_assembly_bias/actions/workflows/run-test.yml)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/ChenYangyao/dwarf_assembly_bias/blob/master/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/dwarf_assembly_bias)](https://pypi.org/project/dwarf_assembly_bias/)
 
-The package holds the codes for the paper "Unexpected clustering pattern in dwarf galaxies challenges formation models" (Journal Name??? - Volume??? - Page???).
+The package holds the codes for the paper ***Unexpected clustering pattern in dwarf galaxies challenges formation models*** (Journal Name??? - Volume??? - Page???).
 
 ## Installation
 

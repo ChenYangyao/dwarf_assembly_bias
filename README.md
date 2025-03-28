@@ -1,3 +1,7 @@
+<div align="center">
+  <img width="1024px" src="https://raw.githubusercontent.com/ChenYangyao/dwarf_assembly_bias/master/docs/site_data/cover-github-2.jpg"/>
+</div>
+
 # Unexpected clustering pattern in dwarf galaxies challenges formation models
 
 [![Last commit](https://img.shields.io/github/last-commit/ChenYangyao/dwarf_assembly_bias/master)](https://github.com/ChenYangyao/dwarf_assembly_bias/commits/master)

@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="1024px" src="https://raw.githubusercontent.com/ChenYangyao/dwarf_assembly_bias/master/docs/site_data/cover-github.jpg"/>
+  <img width="1024px" src="https://raw.githubusercontent.com/ChenYangyao/dwarf_assembly_bias/master/docs/site_data/cover-github.jpg" alt="Dwarf Galaxies Adorning the Ink Wash Painting of Cosmic Web"/>
 </div>
 
 
@@ -8,7 +8,7 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/ChenYangyao/dwarf_assembly_bias/blob/master/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/dwarf_assembly_bias)](https://pypi.org/project/dwarf_assembly_bias/)
 
-The package holds the codes for the paper ***Unexpected clustering pattern in dwarf galaxies challenges formation models*** (Journal Name??? - Volume??? - Page???).
+The package holds the codes for the paper ***Unexpected clustering pattern in dwarf galaxies challenges formation models*** ([arXiv:2504.03305](https://arxiv.org/abs/2504.03305); Nature in press).
 
 ## Installation
 

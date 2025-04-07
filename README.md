@@ -10,6 +10,10 @@
 
 The package holds the codes for the paper ***Unexpected clustering pattern in dwarf galaxies challenges formation models*** ([arXiv:2504.03305](https://arxiv.org/abs/2504.03305); Nature in press).
 
+## What did we discover in this work?
+
+A surprising pattern of spatial distribution was discovered in dwarf galaxies that diffuse ones cluster more strongly than compact ones - reversing the trends seen in massive galaxies. This challenges the structure formation models within the standard cold-dark-matter cosmology, calling for revisions for the understanding of the assembly of visible- and dark-matter structures.
+
 ## Installation
 
 To install the package, run:

@@ -53,3 +53,16 @@ Pull requests are welcome. For any changes, start a pull request to the ``dev`` 
 ### Citation
 
 We ask the users to cite the paper when using the package (code or data) in their research.
+
+### More details of this work
+
+#### Sample construction
+
+The samples and subsamples of observed dwarf galaxies are described in the main text (Methods: "The sample of dwarf galaxies").
+
+To measure the 2PCCF from observation, two additional sets of samples are constructed:
+- **The reference sample**, used as field tracers, is a magnitude-limited sample constructed from the NYU-VAGC sample following the following selection criteria described in 
+Sec. 2.1 of [Lixin Wang et al. 2019](https://ui.adsabs.harvard.edu/abs/2019MNRAS.483.1452W): the $r$-band Petrosian apparent magnitude $r<17.6$; the $r$-band Petrosian absolute magnitude in $[-24, -16]$; the redshift $0.01 < z < 0.2$. 
+- **The random samples**, used to account for the observational selection effects,
+is obtained according to the method described in Sec. 3.1 of [Cheng Li et al. 2006](https://ui.adsabs.harvard.edu/abs/2006MNRAS.368...21L) as follows. We generated ten duplicates for each galaxy in the reference sample and randomly place them in the SDSS survey area. All other properties, including stellar mass and redshift of the duplicates, 
+are the same as those of the parent galaxy. The random sample thus has the same survey geometry, the same distributions of galaxy properties and redshift, as the reference sample.

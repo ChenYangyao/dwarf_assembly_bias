@@ -31,7 +31,7 @@ each for a specific procedure in producing the results in the paper.
 All code samples are put under [docs/code_samples/](docs/code_samples):
 - [cal_2pccf/](docs/code_samples/cal_2pccf/): program for 2PCCF computation.
 - [cov_fit.py](docs/code_samples/cov_fit.py), [fit_bias.py](docs/code_samples/fit_bias.py): measuring the covariance matrix and fitting the relative bias.
-- [cal_halomass.py](docs/code_samples/cal_halomass.py): HI-based halo mass estimation by assuming Burkert profile.
+- [Mhalo.py](docs/code_samples/Mhalo.py): HI-based halo mass estimation by assuming Burkert profile.
 - [theory.ipynb](docs/code_samples/theory.ipynb): theoretical interpretations (galaxy-galaxy and galaxy-cosmic web 2PCCF, abundance matching, model of self-interaction dark matter).
 
 ### Data for the figures
@@ -54,9 +54,12 @@ Pull requests are welcome. For any changes, start a pull request to the ``dev`` 
 
 We ask the users to cite the paper when using the package (code or data) in their research.
 
-### More details of this work
+Users using specific module/code sample should also follow the copyright header in the source files.
 
-#### Sample construction
+
+## Details of this work
+
+### Sample construction
 
 The samples and subsamples of observed dwarf galaxies are described in the main text (Methods: "The sample of dwarf galaxies").
 
@@ -66,3 +69,10 @@ Sec. 2.1 of [Lixin Wang et al. 2019](https://ui.adsabs.harvard.edu/abs/2019MNRAS
 - **The random samples**, used to account for the observational selection effects,
 is obtained according to the method described in Sec. 3.1 of [Cheng Li et al. 2006](https://ui.adsabs.harvard.edu/abs/2006MNRAS.368...21L) as follows. We generated ten duplicates for each galaxy in the reference sample and randomly place them in the SDSS survey area. All other properties, including stellar mass and redshift of the duplicates, 
 are the same as those of the parent galaxy. The random sample thus has the same survey geometry, the same distributions of galaxy properties and redshift, as the reference sample.
+
+
+## Acknowledgements
+
+We thank Fangzhou Jiang for his open source project of self-interaction dark matter (Fangzhou Jiang et al. 2023; [ads](https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.4630J); [github](https://github.com/JiangFangzhou/SIDM)). A copy the source code can be found under [src/dwarf_assembly_bias/sidm/](src/dwarf_assembly_bias/sidm/).
+
+We thank Hui-Jie Hu for his subroutines of HI-based halo mass estimator. A copy of the source code can be found at [docs/code_samples/Mhalo.py](docs/code_samples/Mhalo.py).

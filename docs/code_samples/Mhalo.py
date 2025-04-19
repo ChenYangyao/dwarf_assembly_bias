@@ -1,28 +1,26 @@
+# coding: utf-8
 
+# Copyright (C) 2025 Hui-Jie Hu (huhuijienao@gmail.com) - All Rights Reserved
+# You may use, distribute and modify this code under the MIT license. We kindly
+# request you to give credit to the original author(s) of this code, and cite 
+# the paper, Qi Guo et al. Nature Astronomy 4, 246–251 (2020) if you use this 
+# code in your research.
 
-##############################################################################
+# In[15]:
 
-from time import perf_counter as clock
-from os import path
-import glob, re
-import matplotlib.pyplot as plt
-from astropy.io import fits
-import pickle
-from scipy import ndimage
-import astropy.units as u
 import numpy as np
 from math import *
 import matplotlib
 import csv
 import time
 
+Gc=4.3e-6 #(km/s)^2*kpc/M_sun
+h=0.7
+rhocri=2.8e2*h**2 #M_sun/kpc^3
+cctn = 13
+pc=3.0857e16
 
 def Mhaldrive(Rmax,Vmax,Ac=None,Rac=None): #re kpc Vmax km/s
-    Gc=4.3e-6 #(km/s)^2*kpc/M_sun
-    h=0.7
-    rhocri=2.8e2*h**2 #M_sun/kpc^3
-    cctn = 13
-    pc=3.0857e16
     c00 = cctn #13 primary
     Mc=log(np.power(Vmax,2)*Rmax/Gc,10)
     if Ac == None:
@@ -50,11 +48,6 @@ def Mhaldrive(Rmax,Vmax,Ac=None,Rac=None): #re kpc Vmax km/s
     return Mhalo
 
 def Mhaldrive_Burk(Rmax,Vmax,Rac=None): #re kpc Vmax km/s
-    Gc=4.3e-6 #(km/s)^2*kpc/M_sun
-    h=0.7
-    rhocri=2.8e2*h**2 #M_sun/kpc^3
-    cctn = 13
-    pc=3.0857e16
     Mc=np.log10(np.power(Vmax,2)*Rmax/Gc)
     r00 = 0.65 #primary
     r0 = r00
@@ -72,12 +65,7 @@ def Mhaldrive_Burk(Rmax,Vmax,Rac=None): #re kpc Vmax km/s
             break
     return Mvir
 
-def Mhaldrive_Pseudo(Rmax,Vmax,Rac=None): #re kpc Vmax km/s\
-    Gc=4.3e-6 #(km/s)^2*kpc/M_sun
-    h=0.7
-    rhocri=2.8e2*h**2 #M_sun/kpc^3
-    cctn = 13
-    pc=3.0857e16
+def Mhaldrive_Pseudo(Rmax,Vmax,Rac=None): #re kpc Vmax km/s
     Mc=np.log10(np.power(Vmax,2)*Rmax/Gc)
     r00 = 1 #primary
     r0 = r00
@@ -112,21 +100,3 @@ def Mhaldrive_Pseudo(Rmax,Vmax,Rac=None): #re kpc Vmax km/s\
         R1 = Rvma-Rvmi
     Mvir = np.log10(800*pi/3*rhocri*Rvir**3)
     return Mvir
-    
-
-if __name__ == '__main__':
-    
-    Gc=4.3e-6 #(km/s)^2*kpc/M_sun
-    h=0.7
-    
-    agc,vhi,rhi,Md,snr=np.loadtxt('sample.txt',unpack=True) # agc, vhi, rhi, Md, and snr correspond to the Alfalfa name, rotation velocity in km/s, HI radius in kpc, dark matter mass enclosed within HI radius in log10(solar mass), and signal-to-noise ratio of galaxies.
-    Mhalo_b=[]
-    vhi=(10.0**Md*Gc/rhi)**0.5
-
-    for i in range(len(vhi)):
-        Mhalo_b.append(Mhaldrive_Burk(rhi[i],vhi[i]))  # Halo mass of assuming Burkert profile
-
-
-
-    
-    

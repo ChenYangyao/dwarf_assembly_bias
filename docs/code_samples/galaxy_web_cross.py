@@ -30,12 +30,13 @@ tf = samples.field.TidalField.from_file(data_dir / f'domain.tidal.s99.sm1.hdf5')
 # Compute cross correlation
 lr_range, n_bins =[0.1, 1.2], 8
 rng = 10086
-n_boostrap = 100
+n_bootstrap = 100
 mass_weighted = True
 
-gwc = statistics.cosmic_web.GalaxyWebCross(g_samp, tf, rng=rng)
+gwc = statistics.cosmic_web.GalaxyWebCross(
+    g_samp, tf, lr_range=lr_range, n_bins=n_bins, rng=rng)
 ccf = gwc.corrs(mass_weighted=mass_weighted)
-ccf = [gwc.bootstrap(_ccf, n_boostrap).as_dict() for _ccf in ccf['web_typed']]
+ccf = [gwc.bootstrap(_ccf, n_bootstrap).as_dict() for _ccf in ccf['web_typed']]
 output = {
     'lrs': gwc.lrs,
     'ccf': ccf,

@@ -40,10 +40,14 @@ class TidalField(abc.HasLog):
         self.n_lams = (lams >= lam_off).sum(-1)
 
     @classmethod
-    def from_file(cls, path: Path | str, **init_kw):
+    def from_file(cls, path: Path | str, recon_only=True, **init_kw):
         with h5.File(path) as f:
-            lams, delta, n_grids, l_box, recon_mask = f.datasets[
-                'lam', 'delta_sm_x', 'n_grids', 'l_box', 'reconstruction_mask']
+            lams, delta, n_grids, l_box = f.datasets[
+                'lam', 'delta_sm_x', 'n_grids', 'l_box']
+            if recon_only:
+                recon_mask = f.datasets['reconstruction_mask']
+            else:
+                recon_mask = None
             mesh = Mesh.new(n_grids, l_box)
             lams = np.array(lams, dtype=np.float32)
         return cls(lams, delta, mesh, recon_mask=recon_mask, **init_kw)

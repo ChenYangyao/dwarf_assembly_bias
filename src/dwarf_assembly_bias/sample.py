@@ -96,8 +96,8 @@ class SimSample(SubhaloSet):
         self.objs |= out
 
         return self
-
-    def requires_spin(self) -> Self:
+    
+    def requires_spin(self, vir_only=False) -> Self:
         subhs, z_dst = self.objs, self.z_dst
         ht = self.sim_info.cosmology.halo_theory
         a = 1. / (1. + z_dst)
@@ -108,22 +108,28 @@ class SimSample(SubhaloSet):
 
         for k_in, (fn_rho, k_out) in suf_map.items():
             m_h = subhs[f'm_{k_in}']
-            spin, spin_form = subhs['spin', 'spin_form']
+            
             m_h = m_h.clip(1.0e-3)                      # 1.0e10 Msun/h
             rho_h = fn_rho(z=z_dst)
             r_h = ht.r_vir(m_h, rho_h)
             r_h_phy = r_h*a
             v_h = ht.v_vir(m_h, r_h_phy, to_kmps=True)  # physical km/s
             j_h = np.sqrt(2.) * v_h * r_h_phy
-            spin = Num.norm(spin, 1) / j_h
-            spin_form = Num.norm(spin_form, 1) / j_h
-
             subhs |= {
-                f'spin_{k_out}': spin,
-                f'spin_form_{k_out}': spin_form,
                 f'v_{k_out}': v_h,
                 f'm_{k_out}': m_h,
-                f'r_{k_out}': r_h}
+                f'r_{k_out}': r_h,
+            }
+            
+            if not vir_only:
+                spin, spin_form = subhs['spin', 'spin_form']
+                spin = Num.norm(spin, 1) / j_h
+                spin_form = Num.norm(spin_form, 1) / j_h
+
+                subhs |= {
+                    f'spin_{k_out}': spin,
+                    f'spin_form_{k_out}': spin_form,
+                    }
         return self
 
     def require_c(self):
@@ -170,7 +176,7 @@ class SimSample(SubhaloSet):
         }
         return self
 
-    def requires_assembly(self) -> Self:
+    def requires_assembly(self, need_m=True) -> Self:
         subhs, sim_info, rng = self.objs, self.sim_info, self.ctx.rng
         is_b = sim_info.is_baryon
 
@@ -195,7 +201,7 @@ class SimSample(SubhaloSet):
             'v_max2h': v_max2h, 'v_peak2max': v_peak2max,
         }
 
-        if is_b:
+        if is_b and need_m:
             m_s, r_s, m_h = subhs['m_star', 'r_half_mass_star', 'm_h']
             a = 1. / (1. + self.z_dst)
             h = self.sim_info.cosmology.hubble

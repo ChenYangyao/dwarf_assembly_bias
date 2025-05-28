@@ -7,7 +7,7 @@ from pyhipp.io import h5
 from elucid.geometry.frame import SimFrameSdssL500
 from elucid.geometry.mask import ReconstAreaMaskSdssL500
 from .. import sample
-from ..sample_dumper import SampleTngDark, ExtraPropTngDark
+from ..samples.model_dumper import SampleTngDark, ExtraPropTngDark
 from ..config import ProjPaths
 import gc
 import numpy as np

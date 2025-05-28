@@ -1,3 +1,14 @@
+# Copyright (C) 2025 Yangyao Chen (yangyaochen.astro@foxmail.com) - All Rights 
+# Reserved
+# 
+# You may use, distribute and modify this code under the MIT license. We kindly
+# request you to give credit to the original author(s) of this code, and cite 
+# the following paper(s) if you use this code in your research: 
+# - Zhang Z. et al. 2025. Nature ???, ???.
+#
+# This file is part of the software dwarf_assembly_bias. Here we provide
+# a set of utilities to extract data from galaxy formation models.
+
 from __future__ import annotations
 import typing
 from typing import Self
@@ -169,6 +180,10 @@ class SampleTngDark(abc.HasLog):
 
 
 class ExtraPropTngDark(abc.HasLog):
+    load_keys = ('m_crit200', 'm_mean200', 'r_v_max',
+                    'spin', 'm_sub', 'm_tophat', 'r_tophat', 'x')
+    load_baryon_keys = ('r_half_mass_star', 'sfr', 'm_star')
+    form_keys = ('m_crit200', 'm_mean200', 'spin')
     def __init__(self, tr_ld: sims.TreeLoaderTngDark,
                  in_group: h5.Group,
                  out_group: h5.Group,
@@ -191,10 +206,9 @@ class ExtraPropTngDark(abc.HasLog):
     def load_tree_props(self, keys: tuple[str] | None = None):
         tr_ld = self.tr_ld
         if keys is None:
-            keys = ('m_crit200', 'm_mean200', 'r_v_max',
-                    'spin', 'm_sub', 'm_tophat', 'r_tophat', 'x')
+            keys = self.load_keys
             if tr_ld.sim_info.is_baryon:
-                keys += ('r_half_mass_star', 'sfr', 'm_star')
+                keys += self.load_baryon_keys
         root_offs = self.sample_info['root_offs']
         for k in keys:
             self.log(f'Loading {k}...')
@@ -215,7 +229,7 @@ class ExtraPropTngDark(abc.HasLog):
             'snap_afterform': snap_afterform,
         })
 
-        keys = 'm_crit200', 'm_mean200', 'spin'
+        keys = self.form_keys
         for k in keys:
             k_out = f'{k}_form'
             self.log(f'Loading {k_out}...')
@@ -248,6 +262,24 @@ class ExtraPropTngDark(abc.HasLog):
             'last_sat_snap': last_sat_snap,
         })
 
+
+class SampleEagle(SampleTngDark):
+    def __init__(self, tr_ld: sims.TreeLoaderEagle, 
+                 z_dst = 0.0, 
+                 only_c=True, 
+                 m_sub_lb=5.0e-1, 
+                 verbose=True):
+        super().__init__(tr_ld, z_dst, only_c, m_sub_lb, verbose)
+
+class ExtraPropEagle(ExtraPropTngDark):
+    load_keys = ('m_crit200', 'm_mean200', 'm_sub', 'm_tophat', 'x')
+    load_baryon_keys = ('sfr', 'm_star')
+    form_keys = ('m_crit200', 'm_mean200')
+    def __init__(self, tr_ld: sims.TreeLoaderEagle,
+                 in_group: h5.Group,
+                 out_group: h5.Group,
+                 verbose=True, **kw) -> None:
+        super().__init__(tr_ld, in_group, out_group, verbose, **kw)
 
 class LGalaxiesCat:
 

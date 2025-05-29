@@ -35,6 +35,9 @@ All code samples are put under [docs/code_samples/](docs/code_samples):
 - [galaxy_web_cross.py](docs/code_samples/galaxy_web_cross.py): program for galaxy-cosmic web (knots, filaments, sheets and voids) 2PCCFs, for a sample of galaxies with given real-space locations. [galaxy_web_cross_from_obs_sample.py](docs/code_samples/galaxy_web_cross_from_obs_sample.py): is similar but takes input galaxies in redshift-space and make a correction for the redshift-space distortion before calculating the 2PCCFs.
 - [theory.ipynb](docs/code_samples/theory.ipynb): theoretical interpretations (galaxy-galaxy 2PCCF in theory, abundance matching, model of self-interaction dark matter).
 
+***Data for running the codes***: In order to run the code samples, please download the data
+at [Quark cloud](https://pan.quark.cn/s/0fd2a303e03c), and put them under `docs/code_samples/data/`.
+
 ### Data for the figures
 
 Here we provide all the data sheets, and scripts to load the data sheets and generate the figures exactly as those presented in the paper. All of these are held under [docs/figures/](docs/figures/). Specifically,

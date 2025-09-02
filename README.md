@@ -65,7 +65,7 @@ Users using specific module/code sample should also follow the copyright header 
 
 ### Sample construction
 
-The samples and subsamples of observed dwarf galaxies are described in the main text (Methods: "The sample of dwarf galaxies").
+The samples and subsamples of observed dwarf galaxies are described in the main text (Methods: "The sample of dwarf galaxies"). The parent sample of galaxies (NYU-VAGC), and the catalog of galaxy groups, can be obtain at [this site](https://gax.sjtu.edu.cn/data/Group.html). Note that we used the `model` magnitudes and colors.
 
 To measure the 2PCCF from observation, two additional sets of samples are constructed:
 - **The reference sample**, used as field tracers, is a magnitude-limited sample constructed from the NYU-VAGC sample following the following selection criteria described in 

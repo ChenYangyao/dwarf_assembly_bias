@@ -29,6 +29,7 @@ Alternatively, you can clone the repository and install the package locally via 
 Code samples are organized as individual programs, scripts or jupyter-notebooks,
 each for a specific procedure in producing the results in the paper.
 All code samples are put under [docs/code_samples/](docs/code_samples):
+- [dwarf_sample.ipynb](docs/code_samples/dwarf_sample.ipynb): loading and filtering the observed dwarf galaxy sample.
 - [cal_2pccf/](docs/code_samples/cal_2pccf/): program for two-point cross-correlation function (2PCCF) in observation.
 - [cov_fit.py](docs/code_samples/cov_fit.py), [fit_bias.py](docs/code_samples/fit_bias.py): measuring the covariance matrix and fitting the relative bias.
 - [Mhalo.py](docs/code_samples/Mhalo.py): HI-based halo mass estimation by assuming Burkert profile.

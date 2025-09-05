@@ -4,7 +4,7 @@
 # You may use, distribute and modify this code under the MIT license. We kindly
 # request you to give credit to the original author(s) of this code, and cite 
 # the following paper(s) if you use this code in your research: 
-# - Zhang Z. et al. 2025. Nature ???, ???.
+# - Zhang Z. et al. 2025. Nature 642, 47-52.
 # - Wang H. et al. 2016. ApJ, 831, 164 (for the reconstructed field).
 # - Chen, et al. 2020. ApJ, 899, 81 (for the numerical method of field 
 #   analysis).

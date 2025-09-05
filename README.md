@@ -8,7 +8,7 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/ChenYangyao/dwarf_assembly_bias/blob/master/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/dwarf_assembly_bias)](https://pypi.org/project/dwarf_assembly_bias/)
 
-The package holds the codes for the paper ***Unexpected clustering pattern in dwarf galaxies challenges formation models*** (Ziwen Zhang et al. [Nature 2025](https://www.nature.com/articles/s41586-025-08965-5), [arXiv:2504.03305](https://arxiv.org/abs/2504.03305)).
+The package holds the codes for the paper ***Unexpected clustering pattern in dwarf galaxies challenges formation models*** (Ziwen Zhang et al. [Nature 2025, 642, 47-52](https://www.nature.com/articles/s41586-025-08965-5), [arXiv:2504.03305](https://arxiv.org/abs/2504.03305)).
 
 ## What did we discover in this work?
 
@@ -61,6 +61,10 @@ We ask the users to cite the paper when using the package (code or data) in thei
 
 Users using specific module/code sample should also follow the copyright header in the source files.
 
+### Issues
+
+Any issue is welcomed. If you have any question or suggestion, please open an issue on Github and we will provide a reply as soon as we can. You are also welcomed to contact any of the authors of the paper directly through email (see below for the contact information).
+
 
 ## Details of this work
 
@@ -85,3 +89,14 @@ are the same as those of the parent galaxy. The random sample thus has the same 
 We thank Fangzhou Jiang for his open source project of self-interaction dark matter (Fangzhou Jiang et al. 2023; [ads](https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.4630J); [github](https://github.com/JiangFangzhou/SIDM)). A copy the source code can be found under [src/dwarf_assembly_bias/sidm/](src/dwarf_assembly_bias/sidm/).
 
 We thank Hui-Jie Hu for his subroutines of HI-based halo mass estimator. A copy of the source code can be found at [docs/code_samples/Mhalo.py](docs/code_samples/Mhalo.py).
+
+
+## Contacts
+
+- Ziwen Zhang (ziwen@mail.ustc.edu.cn)
+- Yangyao Chen (yangyaochen.astro@foxmail.com)
+- Yu Rong (rongyua@ustc.edu.cn)
+- Huiyuan Wang* (whywang@ustc.edu.cn)
+- Houjun Mo (hjmo@umass.edu)
+- Xiong Luo (luoxiong@mail.ustc.edu.cn)
+- Hao Li (lh123@mail.ustc.edu.cn)

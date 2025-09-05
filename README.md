@@ -70,7 +70,7 @@ Any issue is welcomed. If you have any question or suggestion, please open an is
 
 ### Sample construction
 
-The samples and subsamples of observed dwarf galaxies are briefly described in the paper (Methods: "The sample of dwarf galaxies"). In more detail, the parent sample of galaxies and catalog of galaxy groups can be obtain at [this site](https://gax.sjtu.edu.cn/data/Group.html). 
+The samples and subsamples of observed dwarf galaxies are briefly described in the paper (Methods: "The sample of dwarf galaxies"). In more detail, the parent sample of galaxies and catalog of galaxy groups can be obtained at [this site](https://gax.sjtu.edu.cn/data/Group.html). 
 Note that we used the `model` magnitudes and colors, and the corresponding version of group catalog `modelC` and galaxy catalog `imodelC_1` (with a selection `r <= 17.72` already applied). From the galaxy catalog, the most massive galaxy in each group is taken as the central galaxy. `R_50` and `Sersic index` are supplied in an additional `galaxy magnitudes` table at the same site. Note that R_50 is in the unit of pixel, and should be converted into arcsec by `1 pixel = 0.396''`.
 MPA-JHU stellar mass is obtained from their site (file `totlgm_dr7_v5_2b.fit`; the MEDIAN field).
 

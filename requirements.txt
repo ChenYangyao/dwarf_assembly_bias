@@ -3,3 +3,5 @@ pytest
 pyhipp>=0.3.5
 pyhipp-sims
 elucid
+emcee
+pdf2image

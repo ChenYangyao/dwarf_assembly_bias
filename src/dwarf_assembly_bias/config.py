@@ -17,8 +17,8 @@ class ColorSets:
 
 
 class ProjPaths:
-    proj_dir = Path(os.environ['MAHGIC_WORK_DIR']
-                    ).resolve() / 'workspaces/obs/dwarf_bias/data'
+    work_dir = Path(os.environ.get('MAHGIC_WORK_DIR', os.getcwd())).resolve()
+    proj_dir = work_dir / 'workspaces/obs/dwarf_bias/data'
     sims_dir = proj_dir / 'sims'
     obs_dir = proj_dir / 'obs'
     models_dir = proj_dir / 'models'

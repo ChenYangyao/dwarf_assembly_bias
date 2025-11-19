@@ -61,7 +61,8 @@ mass_weighted = True            # Whether to weight each field point by its dens
 
 def correct_rsd(target_sample: DataDict[str, np.ndarray]):
     recon_sample = h5.File.load_from(file_recon_sample)
-    mask = recon_sample['is_recon_safe']
+    mask = recon_sample['is_recon']
+    mask = np.ones_like(mask)
     recon_sample = DataDict({k: v[mask] for k, v in recon_sample.items()})
     
     x_recon = np.column_stack(recon_sample['ra', 'dec', 'z_obs'])

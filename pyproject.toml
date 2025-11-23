@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dwarf-assembly-bias"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   { name="Ziwen Zhang", email="ziwen@mail.ustc.edu.cn" },
   { name="Yangyao Chen", email="yangyaochen.astro@foxmail.com" },

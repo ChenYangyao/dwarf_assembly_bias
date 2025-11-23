@@ -164,11 +164,11 @@ class SphSymmProfile(HasDictRepr):
     @property
     def lr_max(self):
         return self._impl._lr_max
-    
+
     @property
     def lr_nodes(self):
         return self._impl._lr_nodes
-    
+
     @property
     def lr_cents(self):
         return self._impl._lr_cents
@@ -180,10 +180,10 @@ class SphSymmProfile(HasDictRepr):
     @property
     def ctx(self):
         return Context(self._impl._ctx)
-    
+
     def M_encs(self, lrs: np.ndarray):
         return self._impl.M_encs(lrs)
-    
+
     def rhos(self, lrs: np.ndarray):
         return self._impl.rhos(lrs)
 
@@ -258,6 +258,9 @@ class RotCurve(HasDictRepr):
                   ctx=default_ctx):
         impl = _RotCurve(lr_nodes, Vc_sq_nodes, ctx._impl)
         return cls(impl)
+
+    def Vc_sqs(self, lrs: np.ndarray):
+        return self._impl.Vc_sqs(lrs)
 
 
 class SphSymmObj(HasDictRepr):
@@ -374,6 +377,12 @@ class SphSymmBaryon(Baryon):
         self.R = R
         self.profile = profile
 
+    @classmethod
+    def from_bins(cls, lr_nodes: np.ndarray, dMs: np.ndarray,
+                  R: float = 1., ctx=default_ctx):
+        profile = SphSymmProfile.from_bins(lr_nodes, dMs, ctx=ctx)
+        return cls(R, profile)
+
     @property
     def ctx(self):
         return self.profile.ctx
@@ -483,6 +492,7 @@ class ExpThin(Baryon):
             R * ys * ys * (I0s * K0s - I1s * K1s)
         rot = RotCurve.from_bins(lrs, Vc_sqs, ctx)
         return rot
+
 
 @numba.njit
 def _adiabatic_evolve(pf_h: _SphSymmProfile, pf_b: _SphSymmProfile,

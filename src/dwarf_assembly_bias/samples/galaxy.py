@@ -83,6 +83,18 @@ class GalaxySample(abc.HasLog, abc.HasDictRepr):
             sel &= val == eq
         return self.subset(sel, copy=False)
     
+    def subset_if(self, key: str) -> Self:
+        '''
+        Equivalent to subset_by_val(key, eq=True).
+        '''
+        return self.subset_by_val(key, eq=True)
+    
+    def subset_if_not(self, key: str) -> Self:
+        '''
+        Equivalent to subset_by_val(key, eq=False).
+        '''
+        return self.subset_by_val(key, eq=False)
+    
     def subset_by_p(self, key: str, p_lo=None, p_hi=None) -> Self:
         val = self[key]
         lo, hi = None, None
@@ -103,3 +115,9 @@ class GalaxySample(abc.HasLog, abc.HasDictRepr):
         '''
         data = h5.File.load_from(path)
         return cls(data, copy=False, **init_kw)
+    
+    def to_file(self, path: Path | str, f_flag='x', **dump_kw):
+        '''
+        @f_flag, dump_kw: passed to h5.File.dump_to().
+        '''
+        h5.File.dump_to(path, data=self.data, f_flag=f_flag, **dump_kw)

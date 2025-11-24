@@ -34,6 +34,7 @@ All code samples are put under [docs/code_samples/](docs/code_samples):
 - [cov_fit.py](docs/code_samples/cov_fit.py), [fit_bias.py](docs/code_samples/fit_bias.py): measuring the covariance matrix and fitting the relative bias.
 - [Mhalo.py](docs/code_samples/Mhalo.py): HI-based halo mass estimation by assuming Burkert profile.
 - [galaxy_web_cross.py](docs/code_samples/galaxy_web_cross.py): program for galaxy-cosmic web (knots, filaments, sheets and voids) 2PCCFs, for a sample of galaxies with given real-space locations. [galaxy_web_cross_from_obs_sample.py](docs/code_samples/galaxy_web_cross_from_obs_sample.py): is similar but takes input galaxies in redshift-space and make a correction for the redshift-space distortion before calculating the 2PCCFs.
+- [sidm_given_baryon.py](docs/code_samples/sidm_given_baryon.py): calculating the SIDM density profile given a CDM halo and a baryon profile.
 - [theory.ipynb](docs/code_samples/theory.ipynb): theoretical interpretations (galaxy-galaxy 2PCCF in theory, abundance matching, model of self-interaction dark matter).
 
 ***Data for running the codes***: In order to run the code samples, please download the data

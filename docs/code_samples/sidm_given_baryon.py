@@ -133,11 +133,13 @@ def run_sidm(
 
     r1_in_pc = halo.r1 * u_l
     rho0_in_solperpc3 = halo.rho0 * u_rho
+    rho1_in_solperpc3 = halo.rho1 * u_rho
 
     return {
         'r_outs_in_pc': r_outs_in_pc,
-        'r1_in_pc': r1_in_pc,
-        'rho0_in_solperpc3': rho0_in_solperpc3,
+        'r1_in_pc': r1_in_pc,                         # one-scattering radius
+        'rho0_in_solperpc3': rho0_in_solperpc3,       # central density
+        'rho1_in_solperpc3': rho1_in_solperpc3,       # density at r1
         'Vcs_in_kmps': {
             'sidm': Vcs_sidm,
             'cdm': Vcs_cdm,
@@ -201,16 +203,13 @@ out = run_sidm(m_h_in_sol, c, age_in_yr, z,
 
 
 # Make a plot
-fig, axs = plot.subplots((1, 2), share=(True, False),
-                         space=0.3,
-                         subsize=(5.0, 5.0),
-                         margin=[0.1, 0.1, 0.15, 0.1], layout='none')
+fig, axs = plot.subplots((1,2), share=(True, False), 
+                        space=0.3, 
+                        subsize=(5.0, 5.0), 
+                        margin=[0.1, 0.1, 0.15, 0.1], layout='none')
 axs_f = axs.flat
 
 ax = axs_f[0]
-
-print('r1 [pc] =', out['r1_in_pc'])
-print('rho0 [Msun/pc^3] =', out['rho0_in_solperpc3'])
 
 rs = out['r_outs_in_pc']
 Vcs = out['Vcs_in_kmps']
@@ -230,7 +229,14 @@ ax.plot(rs, rhos['sidm'], c='purple')
 ax.plot(rs, rhos['cdm'], c='purple', lw=1, ls='--')
 ax.plot(rs, rhos['bary'], c='green')
 
+rho0, rho1 = out['rho0_in_solperpc3'], out['rho1_in_solperpc3']
+r1 = out['r1_in_pc']
+ax.plot([1.0e-8, 1.0e6], [rho0, rho0], c='black', lw=1, ls='-', label=r'$\rho_0$')
+ax.plot([1.0e-8, 1.0e6], [rho1, rho1], c='red', lw=1, ls='-', label=r'$\rho_1$')
+ax.plot([r1, r1], [1.0e-8, 1.0e2], c='blue', lw=1, ls='-', label=r'$r_1$')
+
 ax.scale('log', 'log').lim(y=[1.0e-8, 1.0e2])\
-    .label(r'r\,[{\rm pc}]', r'\rho\,[{\rm M_\odot\,pc^{-3}}]')
+    .label(r'r\,[{\rm pc}]', r'\rho\,[{\rm M_\odot\,pc^{-3}}]')\
+    .leg(loc='ur')
 
 plot.savefig('out.pdf')

@@ -7,6 +7,7 @@ import numpy as np
 cosm = profiles.default_cosm                # Planck 15
 ctx = profiles.Context.from_cosm(cosm)
 
+
 class Halo:
     def __init__(self,
                  cdm: profiles.Halo,
@@ -16,11 +17,12 @@ class Halo:
         self.cdm = cdm
         self.age = age
         self.bary = bary
-        
+
         self.r1: float = None
         self.rho0: float = None
         self.rho1: float = None
-        self.sidm: profiles.SphSymmHalo = None 
+        self.sidm: profiles.SphSymmHalo = None
+
 
 class SIDMDriverFixedBaryonProfile:
     def __init__(self,
@@ -46,12 +48,12 @@ class SIDMDriverFixedBaryonProfile:
 
         dm_ada = self.m_ada(dm, b)
         dm_st = models.StitchedHalo(dm_ada, b, halo.age, self.sigma)
-        
+
         halo.r1 = 10.0**dm_st.lr1
         halo.rho0 = dm_st.iso_core._rho_0
         halo.rho1 = dm_st.rho_r1
         halo.sidm = profiles.SphSymmHalo(dm.R_v, dm_st.profile)
-        
+
 
 def run_sidm(
     m_h_in_sol,
@@ -61,23 +63,22 @@ def run_sidm(
     r_nodes_in_pc,
     dm_bary_bins_in_sol,
     r_outs_in_pc,
-    sigma_in_cm2perg, 
-    halo_def = ('mean', {'f': 200.0}),
+    sigma_in_cm2perg,
+    halo_def=('mean', {'f': 200.0}),
 ):
     us = cosm.unit_system
-    
+
     u_l = us.u_l_to_pc
     u_m = us.u_m_to_sol
     u_t = us.u_t_to_yr
     u_rho = u_m / u_l**3
     u_v2kmps = us.u_v_to_kmps
-    
+
     lr_nodes = np.log10(r_nodes_in_pc / u_l)
     dm_baryon_bins = dm_bary_bins_in_sol / u_m
-    bary = profiles.SphSymmBaryon.from_bins(lr_nodes, dm_baryon_bins)    
+    bary = profiles.SphSymmBaryon.from_bins(lr_nodes, dm_baryon_bins)
     m_bary = bary.M
-    
-    
+
     m_h = m_h_in_sol / u_m
     # find halo radius
     def_name, def_kw = halo_def
@@ -92,13 +93,13 @@ def run_sidm(
     cdm = profiles.NFW(m_h - m_bary, r_h, c=c)
 
     halo = Halo(cdm, age, bary)
-    sidm_driver = SIDMDriverFixedBaryonProfile(sigma_in_cm2perg=sigma_in_cm2perg)
+    sidm_driver = SIDMDriverFixedBaryonProfile(
+        sigma_in_cm2perg=sigma_in_cm2perg)
     sidm_driver.on_halo(halo)
-    
 
     sidm = halo.sidm
     lr_outs = np.log10(r_outs_in_pc / u_l)
-    Vcs_sidm = np.sqrt(sidm.rotation.Vc_sqs(lr_outs)) * u_v2kmps 
+    Vcs_sidm = np.sqrt(sidm.rotation.Vc_sqs(lr_outs)) * u_v2kmps
     Vcs_cdm = np.sqrt(cdm.rotation.Vc_sqs(lr_outs)) * u_v2kmps
     Vcs_bary = np.sqrt(bary.rotation.Vc_sqs(lr_outs)) * u_v2kmps
 
@@ -106,8 +107,15 @@ def run_sidm(
     rhos_cdm = cdm.profile.rhos(lr_outs) * u_rho
     rhos_bary = bary.profile.rhos(lr_outs) * u_rho
 
+    r1_in_pc = halo.r1 * u_l
+    rho0_in_solperpc3 = halo.rho0 * u_rho
+    rho1_in_solperpc3 = halo.rho1 * u_rho
+
     return {
         'r_outs_in_pc': r_outs_in_pc,
+        'r1_in_pc': r1_in_pc,                         # one-scattering radius
+        'rho0_in_solperpc3': rho0_in_solperpc3,       # central density
+        'rho1_in_solperpc3': rho1_in_solperpc3,       # density at r1
         'Vcs_in_kmps': {
             'sidm': Vcs_sidm,
             'cdm': Vcs_cdm,
@@ -119,18 +127,19 @@ def run_sidm(
             'bary': rhos_bary,
         },
     }
-    
+
+
 def test_run():
-        
+
     m_h_in_sol = 1.0e12                      # halo mass (DM + baryon) [Msun]
-    c = 10.0                                 # halo concentration   
+    c = 10.0                                 # halo concentration
     age_in_yr = 5.0e9                        # halo age [yr]
     z = 0.                                   # redshift of the halo
     sigma_in_cm2perg = 0.5                   # SIDM cross section [cm^2/g]
 
-    # the input profile of baryon, specified by the edges (i.e. nodes) [pc] 
+    # the input profile of baryon, specified by the edges (i.e. nodes) [pc]
     # of continous bins and the masses [Msun] in the bins.
-    # For non-spherical baryon distribution, one should give the masses in 
+    # For non-spherical baryon distribution, one should give the masses in
     # spherical shells.
     # Here I take an exponential spheroid as an example.
     r_nodes_in_pc = np.array([
@@ -147,7 +156,8 @@ def test_run():
         1.000e+04, 1.258e+04, 1.584e+04, 1.995e+04,
         2.511e+04, 3.162e+04, 3.981e+04, 5.011e+04,
         6.309e+04, 7.943e+04, 1.000e+05])
-    dm_bary_bins_in_sol = np.array([8.322e+00, 1.681e+01, 3.042e+01, 4.750e+01,
+    dm_bary_bins_in_sol = np.array([
+        8.322e+00, 1.681e+01, 3.042e+01, 4.750e+01,
         7.677e+01, 1.201e+02, 1.914e+02, 3.034e+02,
         4.768e+02, 7.659e+02, 1.197e+03, 1.919e+03,
         3.024e+03, 4.782e+03, 7.633e+03, 1.191e+04,
@@ -162,12 +172,12 @@ def test_run():
         5.085e+08, 2.565e+08])
 
     # at which radii to output the density and Vc profiles [pc]
-    r_outs_in_pc = np.logspace(0., 6., 61)   
+    r_outs_in_pc = np.logspace(0., 6., 61)
 
     # run SIDM model
     out = run_sidm(m_h_in_sol, c, age_in_yr, z,
-            r_nodes_in_pc, dm_bary_bins_in_sol, 
-            r_outs_in_pc, sigma_in_cm2perg)
+                r_nodes_in_pc, dm_bary_bins_in_sol,
+                r_outs_in_pc, sigma_in_cm2perg)
 
 
     # Make a plot
@@ -197,7 +207,14 @@ def test_run():
     ax.plot(rs, rhos['cdm'], c='purple', lw=1, ls='--')
     ax.plot(rs, rhos['bary'], c='green')
 
+    rho0, rho1 = out['rho0_in_solperpc3'], out['rho1_in_solperpc3']
+    r1 = out['r1_in_pc']
+    ax.plot([1.0e-8, 1.0e6], [rho0, rho0], c='black', lw=1, ls='-', label=r'$\rho_0$')
+    ax.plot([1.0e-8, 1.0e6], [rho1, rho1], c='red', lw=1, ls='-', label=r'$\rho_1$')
+    ax.plot([r1, r1], [1.0e-8, 1.0e2], c='blue', lw=1, ls='-', label=r'$r_1$')
+
     ax.scale('log', 'log').lim(y=[1.0e-8, 1.0e2])\
-        .label(r'r\,[{\rm pc}]', r'\rho\,[{\rm M_\odot\,pc^{-3}}]')
+        .label(r'r\,[{\rm pc}]', r'\rho\,[{\rm M_\odot\,pc^{-3}}]')\
+        .leg(loc='ur')
 
     plot.savefig('out.pdf')

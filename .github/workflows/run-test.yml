@@ -10,8 +10,50 @@ on:
     branches: [ "master", "dev" ]
 
 jobs:
-  build:
+  test-conda:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -el {0}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["ubuntu", "macos"]
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+    - uses: actions/checkout@v3
+    - uses: conda-incubator/setup-miniconda@v4
+      with:
+        activate-environment: test-conda
+        python-version: ${{ matrix.python-version }}
+        channels: conda-forge
+        allow-softlinks: true
+        channel-priority: flexible
+        show-channel-urls: true
+    - name: Install dependencies
+      run: |
+        conda info
+        conda list
+        conda config --show-sources
+        conda config --show
+        conda install gsl pip
+        python -m pip install --upgrade pip
+        python -m pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Lint with flake8
+      run: |
+        flake8 --version 
+        # stop the build if there are Python syntax errors or undefined names
+        # flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        # flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      run: |
+        export PYTHONPATH=$PYTHONPATH:$PWD/src
+        export MAHGIC_WORK_DIR=$PWD
+        pytest
 
+  test-pypi:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -26,6 +68,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        sudo apt-get install libgsl-dev
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi

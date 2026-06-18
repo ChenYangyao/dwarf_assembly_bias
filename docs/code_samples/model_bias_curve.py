@@ -13,7 +13,7 @@
 #   and halo catalogs).
 #
 # Usage:
-# python bias_curve.py
+# python model_bias_curve.py
 #
 # This takes input files associated with the this script, computes the bias 
 # curve, saves the result to a JSON file, and makes a plot comparing with 
